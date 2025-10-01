@@ -1,6 +1,7 @@
 
 %{
     // Definitions
+    #include <stdio.h>
 %}
 
 
@@ -9,11 +10,11 @@
      
 %%
 
-int yywrap(){ return 0;}  //wraps above rule section
+int yywrap(){ return 1; }  //wraps above rule section, return 1 = eof
 
 int main()
 {
-
     yylex();
+    printf("Hello\n");
     return 0;
 }

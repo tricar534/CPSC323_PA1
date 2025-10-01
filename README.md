@@ -17,7 +17,7 @@ It scans a source code file, identifies tokens such as identifiers, numbers, ope
 
 1. **Generate the scanner code using Flex**
    ```bash
-   flex scanner.l
+   flex ScannerCode.l
 2. **Compile generated code with gcc** 
     ```bash
     gcc lex.yy.c -o scanner
