@@ -26,3 +26,10 @@ It scans a source code file, identifies tokens such as identifiers, numbers, ope
     ./scanner < input_sourcecode.txt > output.txt
 - output.txt -> will list the tokens
 ---
+
+## Easy copy and paste to run
+    flex ScannerCode.l
+    gcc lex.yy.c -o scanner
+    ./scanner < input_sourcecode.txt > output.txt
+
+---
