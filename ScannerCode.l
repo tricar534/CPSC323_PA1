@@ -11,13 +11,16 @@
 "//".*      { /*Ignore comments, .* any character reapeated*/ }
 [ \t\n]+    { /* Ignore whitespaces */ } 
 
+    /* STRING */
+\"[^\"]*\"      { printf("STRING \t\t\t%s\n", yytext); }   // 
+
     /* KEYWORD */ 
-"int"       { printf("KEYWORD \t%s\n", yytext); }
-"while"     { printf("KEYWORD \t%s\n", yytext); }
-"for"       { printf("KEYWORD \t%s\n", yytext); }
-"else"      { printf("KEYWORD \t%s\n", yytext); }
-"if"        { printf("KEYWORD \t%s\n", yytext); }
-"return"    { printf("KEYWORD \t%s\n", yytext); }
+"int"       { printf("KEYWORD \t\t%s\n", yytext); }
+"while"     { printf("KEYWORD \t\t%s\n", yytext); }
+"for"       { printf("KEYWORD \t\t%s\n", yytext); }
+"else"      { printf("KEYWORD \t\t%s\n", yytext); }
+"if"        { printf("KEYWORD \t\t%s\n", yytext); }
+"return"    { printf("KEYWORD \t\t%s\n", yytext); }
 
     /* PUNCTUATION */ 
 "("     { printf("PUNCTUATION \t%s\n", yytext);}
@@ -28,23 +31,23 @@
 "}"     { printf("PUNCTUATION \t%s\n", yytext);}
     
     /* IDENTIFIER */
-[a-zA-Z][a-zA-Z0-9]* {printf("IDENTIFIER \t%s\n", yytext);}
+[a-zA-Z][a-zA-Z0-9]* {printf("IDENTIFIER \t\t%s\n", yytext);}
 
     /* OPERATOR */ 
-"<="    { printf("OPERATOR \t%s\n", yytext);}
-">="    { printf("OPERATOR \t%s\n", yytext);}
-">>"    { printf("OPERATOR \t%s\n", yytext);}
-"<<"    { printf("OPERATOR \t%s\n", yytext);}
-"=="    { printf("OPERATOR \t%s\n", yytext);}
-"<"     { printf("OPERATOR \t%s\n", yytext);}
-">"     { printf("OPERATOR \t%s\n", yytext);}
-"="     { printf("OPERATOR \t%s\n", yytext);}
-"+"     { printf("OPERATOR \t%s\n", yytext);}
-"-"     { printf("OPERATOR \t%s\n", yytext);}
-"%"     { printf("OPERATOR \t%s\n", yytext);}
+"<="    { printf("OPERATOR \t\t%s\n", yytext);}
+">="    { printf("OPERATOR \t\t%s\n", yytext);}
+">>"    { printf("OPERATOR \t\t%s\n", yytext);}
+"<<"    { printf("OPERATOR \t\t%s\n", yytext);}
+"=="    { printf("OPERATOR \t\t%s\n", yytext);}
+"<"     { printf("OPERATOR \t\t%s\n", yytext);}
+">"     { printf("OPERATOR \t\t%s\n", yytext);}
+"="     { printf("OPERATOR \t\t%s\n", yytext);}
+"+"     { printf("OPERATOR \t\t%s\n", yytext);}
+"-"     { printf("OPERATOR \t\t%s\n", yytext);}
+"%"     { printf("OPERATOR \t\t%s\n", yytext);}
 
     /* INTEGER */ 
-[0-9]+   { printf("INTEGER \t%s\n", yytext);}
+[0-9]+   { printf("INTEGER \t\t%s\n", yytext);}
 
     /* REAL NUMBER */ 
 [0-9]+"."[0-9]*   {printf("REAL NUMBER \t%s\n", yytext);}
