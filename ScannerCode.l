@@ -11,7 +11,7 @@
 "//".*      { /*Ignore comments, .* any character reapeated*/ }
 [ \t\n]+    { /* Ignore whitespaces */ } 
 
-    /* Keywords */ 
+    /* KEYWORD */ 
 "int"       { printf("KEYWORD \t%s\n", yytext); }
 "while"     { printf("KEYWORD \t%s\n", yytext); }
 "for"       { printf("KEYWORD \t%s\n", yytext); }

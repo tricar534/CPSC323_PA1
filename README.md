@@ -2,14 +2,15 @@
 
 ## Purpose
 This project is a lexical analyzer built with **Flex**.  
-It scans a source code file, identifies tokens such as identifiers, numbers, operators, and delimiters, and outputs them in two columns  
+It scans a source code file, identifies tokens such as keyword, punctuation, numbers, 
+real numbers, operators, and identifiers, and outputs them in two columns
 
 ---
 
 ## Requirements
 - Flex
 - GCC
-- A test input file (Ex: `input_sourcecode`)
+- A test input file (Ex: `input_sourcecode.txt`)
 
 ---
 
