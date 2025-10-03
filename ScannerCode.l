@@ -1,56 +1,81 @@
-
 %{
     // Definitions
     #include <stdio.h>
 %}
 
-
 %%
-    // Rules: Patterns actions
+    /* Rules: Patterns actions */
 
-"//".*      { /*Ignore comments, .* any character reapeated*/ }
+"//".*      { /* Ignore comments */ }
 [ \t\n]+    { /* Ignore whitespaces */ } 
 
     /* STRING */
-\"[^\"]*\"      { printf("STRING \t\t\t%s\n", yytext); }   // 
+\"[^\"]*\"      { printf("%-14s %s\n", "STRING", yytext); }   // 
 
     /* KEYWORD */ 
-"int"       { printf("KEYWORD \t\t%s\n", yytext); }
-"while"     { printf("KEYWORD \t\t%s\n", yytext); }
-"for"       { printf("KEYWORD \t\t%s\n", yytext); }
-"else"      { printf("KEYWORD \t\t%s\n", yytext); }
-"if"        { printf("KEYWORD \t\t%s\n", yytext); }
-"return"    { printf("KEYWORD \t\t%s\n", yytext); }
+"int"       { printf("%-14s %s\n", "KEYWORD", yytext); }
+"while"     { printf("%-14s %s\n", "KEYWORD", yytext); }
+"for"       { printf("%-14s %s\n", "KEYWORD", yytext); }
+"else"      { printf("%-14s %s\n", "KEYWORD", yytext); }
+"if"        { printf("%-14s %s\n", "KEYWORD", yytext); }
+"return"    { printf("%-14s %s\n", "KEYWORD", yytext); }
 
     /* PUNCTUATION */ 
-"("     { printf("PUNCTUATION \t%s\n", yytext);}
-")"     { printf("PUNCTUATION \t%s\n", yytext);}
-";"     { printf("PUNCTUATION \t%s\n", yytext);}
-","     { printf("PUNCTUATION \t%s\n", yytext);}
-"{"     { printf("PUNCTUATION \t%s\n", yytext);}
-"}"     { printf("PUNCTUATION \t%s\n", yytext);}
+"("     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
+")"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
+";"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
+","     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
+"{"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
+"}"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
     
     /* IDENTIFIER */
-[a-zA-Z][a-zA-Z0-9]* {printf("IDENTIFIER \t\t%s\n", yytext);}
+[a-zA-Z][a-zA-Z0-9]* { printf("%-14s %s\n", "IDENTIFIER", yytext); }
 
-    /* OPERATOR */ 
-"<="    { printf("OPERATOR \t\t%s\n", yytext);}
-">="    { printf("OPERATOR \t\t%s\n", yytext);}
-">>"    { printf("OPERATOR \t\t%s\n", yytext);}
-"<<"    { printf("OPERATOR \t\t%s\n", yytext);}
-"=="    { printf("OPERATOR \t\t%s\n", yytext);}
-"<"     { printf("OPERATOR \t\t%s\n", yytext);}
-">"     { printf("OPERATOR \t\t%s\n", yytext);}
-"="     { printf("OPERATOR \t\t%s\n", yytext);}
-"+"     { printf("OPERATOR \t\t%s\n", yytext);}
-"-"     { printf("OPERATOR \t\t%s\n", yytext);}
-"%"     { printf("OPERATOR \t\t%s\n", yytext);}
+    /* OPERATOR — longer ones first */ 
+"=="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"!="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"<="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+">="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+">>"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"<<"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"&&"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"||"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"+="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"-="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"*="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"/="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"%="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"&="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"|="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"^="    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"<<="   { printf("%-14s %s\n", "OPERATOR", yytext); }
+">>="   { printf("%-14s %s\n", "OPERATOR", yytext); }
+"++"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"--"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+"->"    { printf("%-14s %s\n", "OPERATOR", yytext); }
+
+    /* Single-char operators */ 
+"<"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+">"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"="     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"+"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"-"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"*"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"/"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"%"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"!"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"&"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"|"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"^"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"~"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+"?"     { printf("%-14s %s\n", "OPERATOR", yytext); }
+":"     { printf("%-14s %s\n", "OPERATOR", yytext); }
 
     /* INTEGER */ 
-[0-9]+   { printf("INTEGER \t\t%s\n", yytext);}
+[0-9]+   { printf("%-14s %s\n", "INTEGER", yytext); }
 
     /* REAL NUMBER */ 
-[0-9]+"."[0-9]*   {printf("REAL NUMBER \t%s\n", yytext);}
+[0-9]+"."[0-9]*   { printf("%-14s %s\n", "REAL NUMBER", yytext); }
 
 %%
 
@@ -58,7 +83,8 @@ int yywrap(){ return 1; }  //wraps above rule section, return 1 = eof
 
 int main()
 {
-    printf("TOKEN\t\tLexems\n------------------------\n");
+    printf("%-14s %s\n", "TOKEN", "Lexemes");
+    printf("-------------- ----------------\n");
     yylex();
     return 0;
 }
