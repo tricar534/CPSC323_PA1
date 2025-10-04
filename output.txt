@@ -1,82 +1,10 @@
-TOKEN		Lexems
-------------------------
-KEYWORD 		int
-IDENTIFIER 		main
-PUNCTUATION 	(
-PUNCTUATION 	)
-PUNCTUATION 	{
-KEYWORD 		int
-IDENTIFIER 		sum
-OPERATOR 		=
-INTEGER 		0
-PUNCTUATION 	;
-KEYWORD 		for
-PUNCTUATION 	(
-KEYWORD 		int
-IDENTIFIER 		i
-OPERATOR 		=
-INTEGER 		1
-PUNCTUATION 	;
-IDENTIFIER 		i
-OPERATOR 		<=
-INTEGER 		10
-PUNCTUATION 	;
-IDENTIFIER 		i
-OPERATOR 		=
-IDENTIFIER 		i
-OPERATOR 		+
-INTEGER 		1
-PUNCTUATION 	)
-PUNCTUATION 	{
-KEYWORD 		if
-PUNCTUATION 	(
-IDENTIFIER 		i
-OPERATOR 		%
-INTEGER 		2
-OPERATOR 		==
-INTEGER 		0
-PUNCTUATION 	)
-PUNCTUATION 	{
-IDENTIFIER 		sum
-OPERATOR 		=
-IDENTIFIER 		sum
-OPERATOR 		+
-IDENTIFIER 		i
-PUNCTUATION 	;
-PUNCTUATION 	}
-KEYWORD 		else
-PUNCTUATION 	{
-IDENTIFIER 		sum
-OPERATOR 		=
-IDENTIFIER 		sum
-OPERATOR 		-
-IDENTIFIER 		i
-PUNCTUATION 	;
-PUNCTUATION 	}
-PUNCTUATION 	}
-KEYWORD 		while
-PUNCTUATION 	(
-IDENTIFIER 		sum
-OPERATOR 		<
-INTEGER 		100
-PUNCTUATION 	)
-PUNCTUATION 	{
-IDENTIFIER 		sum
-OPERATOR 		=
-IDENTIFIER 		sum
-OPERATOR 		+
-INTEGER 		5
-PUNCTUATION 	;
-IDENTIFIER 		cout
-OPERATOR 		<<
-STRING 			"Current sum: "
-OPERATOR 		<<
-IDENTIFIER 		sum
-OPERATOR 		<<
-IDENTIFIER 		endl
-PUNCTUATION 	;
-PUNCTUATION 	}
-KEYWORD 		return
-IDENTIFIER 		sum
-PUNCTUATION 	;
-PUNCTUATION 	}
+Token      Lexemes
+-------------------------------
+KEYWORD    int, int, for, int, if, else, while, return
+IDENTIFIER main, sum, i, i, i, i, i, sum, sum, i, sum, sum, i, sum, sum, sum, cout, sum, endl, sum
+PUNCTUATION (, ), {, ;, (, ;, ;, ), {, (, ), {, ;, }, {, ;, }, }, (, ), {, ;, ;, }, ;, }
+OPERATOR   =, =, <=, =, +, %, ==, =, +, =, -, <, =, +, <<, <<, <<
+INTEGER    0, 1, 10, 1, 2, 0, 100, 5
+REAL       
+STRING     "Current sum: "
+UNKNOWN    
