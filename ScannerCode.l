@@ -1,90 +1,95 @@
 %{
-    // Definitions
-    #include <stdio.h>
+#include <stdio.h>
+#include <string.h>
+
+/* Collect lexemes per token type */
+#define BUFSZ 16384
+static char KW[BUFSZ]="", IDB[BUFSZ]="", PUNC[BUFSZ]="", OP[BUFSZ]="";
+static char INTL[BUFSZ]="", REALS[BUFSZ]="", STRL[BUFSZ]="", UNK[BUFSZ]="";
+
+static void append(char *buf, size_t cap, const char *txt){
+    size_t n = strlen(buf);
+    if (n && n + 2 < cap) { buf[n++]=','; buf[n++]=' '; buf[n]='\0'; }
+    strncat(buf, txt, cap - 1 - strlen(buf));
+}
 %}
 
-%%
-    /* Rules: Patterns actions */
-
-"//".*      { /* Ignore comments */ }
-[ \t\n]+    { /* Ignore whitespaces */ } 
-
-    /* STRING */
-\"[^\"]*\"      { printf("%-14s %s\n", "STRING", yytext); }   // 
-
-    /* KEYWORD */ 
-"int"       { printf("%-14s %s\n", "KEYWORD", yytext); }
-"while"     { printf("%-14s %s\n", "KEYWORD", yytext); }
-"for"       { printf("%-14s %s\n", "KEYWORD", yytext); }
-"else"      { printf("%-14s %s\n", "KEYWORD", yytext); }
-"if"        { printf("%-14s %s\n", "KEYWORD", yytext); }
-"return"    { printf("%-14s %s\n", "KEYWORD", yytext); }
-
-    /* PUNCTUATION */ 
-"("     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
-")"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
-";"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
-","     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
-"{"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
-"}"     { printf("%-14s %s\n", "PUNCTUATION", yytext); }
-    
-    /* IDENTIFIER */
-[a-zA-Z][a-zA-Z0-9]* { printf("%-14s %s\n", "IDENTIFIER", yytext); }
-
-    /* OPERATOR — longer ones first */ 
-"=="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"!="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"<="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-">="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-">>"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"<<"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"&&"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"||"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"+="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"-="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"*="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"/="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"%="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"&="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"|="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"^="    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"<<="   { printf("%-14s %s\n", "OPERATOR", yytext); }
-">>="   { printf("%-14s %s\n", "OPERATOR", yytext); }
-"++"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"--"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-"->"    { printf("%-14s %s\n", "OPERATOR", yytext); }
-
-    /* Single-char operators */ 
-"<"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-">"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"="     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"+"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"-"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"*"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"/"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"%"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"!"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"&"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"|"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"^"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"~"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-"?"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-":"     { printf("%-14s %s\n", "OPERATOR", yytext); }
-
-    /* INTEGER */ 
-[0-9]+   { printf("%-14s %s\n", "INTEGER", yytext); }
-
-    /* REAL NUMBER */ 
-[0-9]+"."[0-9]*   { printf("%-14s %s\n", "REAL NUMBER", yytext); }
+%option noyywrap
 
 %%
+"//".*                                  ;
+[ \t\n]+                                ;
 
-int yywrap(){ return 1; }  //wraps above rule section, return 1 = eof
+\"[^\"]*\"                              { append(STRL, BUFSZ, yytext); }
 
-int main()
-{
-    printf("%-14s %s\n", "TOKEN", "Lexemes");
-    printf("-------------- ----------------\n");
+"int"                                   { append(KW,   BUFSZ, yytext); }
+"while"                                 { append(KW,   BUFSZ, yytext); }
+"for"                                   { append(KW,   BUFSZ, yytext); }
+"else"                                  { append(KW,   BUFSZ, yytext); }
+"if"                                    { append(KW,   BUFSZ, yytext); }
+"return"                                { append(KW,   BUFSZ, yytext); }
+
+"("                                     { append(PUNC, BUFSZ, yytext); }
+")"                                     { append(PUNC, BUFSZ, yytext); }
+";"                                     { append(PUNC, BUFSZ, yytext); }
+","                                     { append(PUNC, BUFSZ, yytext); }
+"{"                                     { append(PUNC, BUFSZ, yytext); }
+"}"                                     { append(PUNC, BUFSZ, yytext); }
+
+[a-zA-Z][a-zA-Z0-9]*                    { append(IDB,  BUFSZ, yytext); }
+
+"<="                                    { append(OP,   BUFSZ, yytext); }
+">="                                    { append(OP,   BUFSZ, yytext); }
+">>"                                    { append(OP,   BUFSZ, yytext); }
+"<<"                                    { append(OP,   BUFSZ, yytext); }
+"=="                                    { append(OP,   BUFSZ, yytext); }
+"!="                                    { append(OP,   BUFSZ, yytext); }
+"&&"                                    { append(OP,   BUFSZ, yytext); }
+"||"                                    { append(OP,   BUFSZ, yytext); }
+"+="                                    { append(OP,   BUFSZ, yytext); }
+"-="                                    { append(OP,   BUFSZ, yytext); }
+"*="                                    { append(OP,   BUFSZ, yytext); }
+"/="                                    { append(OP,   BUFSZ, yytext); }
+"%="                                    { append(OP,   BUFSZ, yytext); }
+"&="                                    { append(OP,   BUFSZ, yytext); }
+"|="                                    { append(OP,   BUFSZ, yytext); }
+"^="                                    { append(OP,   BUFSZ, yytext); }
+"<<="                                   { append(OP,   BUFSZ, yytext); }
+">>="                                   { append(OP,   BUFSZ, yytext); }
+"++"                                    { append(OP,   BUFSZ, yytext); }
+"--"                                    { append(OP,   BUFSZ, yytext); }
+"->"                                    { append(OP,   BUFSZ, yytext); }
+
+"<"                                     { append(OP,   BUFSZ, yytext); }
+">"                                     { append(OP,   BUFSZ, yytext); }
+"="                                     { append(OP,   BUFSZ, yytext); }
+"+"                                     { append(OP,   BUFSZ, yytext); }
+"-"                                     { append(OP,   BUFSZ, yytext); }
+"*"                                     { append(OP,   BUFSZ, yytext); }
+"/"                                     { append(OP,   BUFSZ, yytext); }
+"%"                                     { append(OP,   BUFSZ, yytext); }
+
+[0-9]+"."[0-9]*                         { append(REALS,BUFSZ, yytext); }
+[0-9]+                                  { append(INTL, BUFSZ, yytext); }
+
+.                                       { append(UNK,  BUFSZ, yytext); }
+%%
+
+int main(void){
+    printf("%-10s %s\n","Token","Lexemes");
+    printf("-------------------------------\n");
+
+    /* Run the scanner to fill the buffers */
     yylex();
+
+    /* Print one row per token type (blank if none matched) */
+    printf("%-10s %s\n","KEYWORD",     *KW    ? KW    : "");
+    printf("%-10s %s\n","IDENTIFIER",  *IDB   ? IDB   : "");
+    printf("%-10s %s\n","PUNCTUATION", *PUNC  ? PUNC  : "");
+    printf("%-10s %s\n","OPERATOR",    *OP    ? OP    : "");
+    printf("%-10s %s\n","INTEGER",     *INTL  ? INTL  : "");
+    printf("%-10s %s\n","REAL",        *REALS ? REALS : "");
+    printf("%-10s %s\n","STRING",      *STRL  ? STRL  : "");
+    printf("%-10s %s\n","UNKNOWN",     *UNK   ? UNK   : "");
     return 0;
 }
