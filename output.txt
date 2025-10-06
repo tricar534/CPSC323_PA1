@@ -1,10 +1,10 @@
-Token      Lexemes
+Token         Lexemes
 -------------------------------
-KEYWORD    int, int, for, int, if, else, while, return
-IDENTIFIER main, sum, i, i, i, i, i, sum, sum, i, sum, sum, i, sum, sum, sum, cout, sum, endl, sum
-PUNCTUATION (, ), {, ;, (, ;, ;, ), {, (, ), {, ;, }, {, ;, }, }, (, ), {, ;, ;, }, ;, }
-OPERATOR   =, =, <=, =, +, %, ==, =, +, =, -, <, =, +, <<, <<, <<
-INTEGER    0, 1, 10, 1, 2, 0, 100, 5
-REAL       
-STRING     "Current sum: "
-UNKNOWN    
+KEYWORD       int, int, for, int, if, else, while, return
+IDENTIFIER    main, sum, i, i, i, i, i, sum, sum, i, sum, sum, i, sum, sum, sum, cout, sum, endl, sum
+PUNCTUATION   (, ), {, ;, (, ;, ;, ), {, (, ), {, ;, }, {, ;, }, }, (, ), {, ;, ;, }, ;, }
+OPERATOR      =, =, <=, =, +, %, ==, =, +, =, -, <, =, +, <<, <<, <<
+INTEGER       0, 1, 10, 1, 2, 0, 100, 5
+REAL NUMBER   
+STRING        "Current sum: "
+UNKNOWN       
