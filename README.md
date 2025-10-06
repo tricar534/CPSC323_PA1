@@ -3,7 +3,7 @@
 ## Purpose
 This project is a lexical analyzer built with **Flex**.  
 It scans a source code file, identifies tokens such as keyword, punctuation, numbers, 
-real numbers, operators, and identifiers, and outputs them in two columns
+real numbers, operators, unknown, and identifiers, and outputs them in two columns
 
 ---
 
@@ -19,18 +19,22 @@ real numbers, operators, and identifiers, and outputs them in two columns
 1. **Generate the scanner code using Flex**
    ```bash
    flex ScannerCode.l
+   ```
 2. **Compile generated code with gcc** 
     ```bash
     gcc lex.yy.c -o scanner
+    ```
 3. **Run the scanner with input source file**
     ```bash 
     ./scanner < input_sourcecode.txt > output.txt
-- output.txt -> will list the tokens
+    ```
+    output.txt -> will list the tokens
+    
 ---
 
 ## Easy copy and paste to run
     flex ScannerCode.l
     gcc lex.yy.c -o scanner
     ./scanner < input_sourcecode.txt > output.txt
-
+    
 ---
