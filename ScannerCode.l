@@ -20,12 +20,15 @@ static void append(char *buf, size_t cap, const char *txt){
 %%
     /* Ignore comments */
 "//".*                                  ;
+"/*".*"*/"                              ;   /**  ignore "/**"/ comments */
 
     /* Ignore whitespaces */
 [ \t\n]+                                ;
 
     /* String */
 \"[^\"]*\"                              { append(STRL, BUFSZ, yytext); }
+
+    
 
     /* Keywords */
 "int"                                   { append(KW,   BUFSZ, yytext); }
@@ -78,14 +81,20 @@ static void append(char *buf, size_t cap, const char *txt){
 "/"                                     { append(OP,   BUFSZ, yytext); }
 "%"                                     { append(OP,   BUFSZ, yytext); }
 
+
+    /* Octal*/
+0[0-7]+                                 { append(UNK, BUFSZ, yytext); }
+
     /* Real number */
 [0-9]+"."[0-9]*                         { append(REALS,BUFSZ, yytext); }
+
+    /* Negative numbers*/
+"-"[0-9]+                               { append(INTL, BUFSZ, yytext); }
 
     /* Integer */
 [0-9]+                                  { append(INTL, BUFSZ, yytext); }
 
-    /* Unknown */
-.                                       { append(UNK,  BUFSZ, yytext); }
+
 %%
 
 int main(void){
@@ -101,7 +110,7 @@ int main(void){
     printf("%-13s %s\n","PUNCTUATION", *PUNC  ? PUNC  : "");
     printf("%-13s %s\n","OPERATOR",    *OP    ? OP    : "");
     printf("%-13s %s\n","INTEGER",     *INTL  ? INTL  : "");
-    printf("%-13s %s\n","REAL NUMBER",        *REALS ? REALS : "");
+    printf("%-13s %s\n","REAL NUMBER", *REALS ? REALS : "");
     printf("%-13s %s\n","STRING",      *STRL  ? STRL  : "");
     printf("%-13s %s\n","UNKNOWN",     *UNK   ? UNK   : "");
     return 0;
