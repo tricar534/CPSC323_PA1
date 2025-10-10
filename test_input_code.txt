@@ -1,0 +1,10 @@
+/*this is a C++ snippet*/
+
+int main ( ) {
+    for ( int i = -22; i <= 001; i = i + 1 ) {
+        while ( i == 100 ) {
+          cout << "Hello World!"; //print out the string here
+        }
+    } 
+    return 0;
+}
